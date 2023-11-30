@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarRental</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <link rel="stylesheet" href="../static/styles/style.css?{{ cache_id }}">
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="../static/images/favlogo.webp?{{ cache_id }}">
+    <!--=============== REMIX ICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+
+
+</head>
+
+<body>
+    <header>
+        <a href="#" class="logo"><img src="../static/images/Logo.webp" alt=""></a>
+        <div class="nav__toggle" id="nav-toggle">
+            <i class="ri-menu-line"></i>
+        </div>
+        
+        <ul class="nav__list">
+            <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
+            <li class="nav__item"><a href="#services" class="nav__link">Service</a></li>
+        </ul>
+            
+
+    </header>
+
+    <section class="home" id="home">
+        <div class="text">
+            <h1 class="first">Your Budget<br></h1>
+            <h1 class="second">Matters</h1>
+			<p>Whether you're planning a business trip, a family vacation, or a solo adventure, our selection of hight quality vehicles garantees that you find the best match for your needs and budget.</p>
+        </div>
+        <div class="form-container">
+            <form action="">
+                <div class="input-box">
+                    <span>Location</span>
+                    <select id="location" name="location">
+                        <option value="" disabled selected>Choose your location</option>
+						{% for location in locations %}
+						<option value="" data-id="{{ location.id }}" data-name="{{ location.name }}">{{ location.name }}</option>
+						{% endfor %}
+                        <!-- Add other options here -->
+                    </select>            
+                               
+                </div>
+                <div class="input-box">
+                    <span>Prices</span>
+                    <select id="price" name="price">
+                        <option value="" disabled selected>Choose your price</option>
+						<option value="" data-id="0" data-name="price4">ALL</option>
+                        <option value="" data-id="75" data-name="price1">75</option>
+                        <option value="" data-id="120" data-name="price2">120</option>
+                        <option value="" data-id="350" data-name="price3">350</option>
+                        <!-- Add other options here -->
+                    </select> 
+                </div>
+                <a href="#services" class="btn1">submit</a> 
+            </form>
+
+        </div>
+    </section>
+    <!--ride section-->
+    <section class="ride" id="ride">
+        <div class="heading">
+            <span>How Its Work</span>
+            <h1>Book With 3 Easy Steps</h1>
+        </div>
+        <div class="ride-container">
+            <div class="box">
+                <i class='bx bxs-map'></i>
+                <h2>Choose a location</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident corrupti inventore vel quas, excepturi eos eius odit voluptate. </p>
+            </div>
+            <div class="box">
+                <i class='bx bxs-dollar-circle' ></i>
+                <h2>Pick a Price</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident corrupti inventore vel quas, excepturi eos eius odit voluptate. </p>
+            </div>
+            <div class="box">
+                <i class='bx bxs-calendar-check' ></i>
+                <h2>Book Your Car</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident corrupti inventore vel quas, excepturi eos eius odit voluptate. </p>
+            </div>
+        </div>
+
+    </section>
+    <!--service section-->
+    <section class="services" id="services">
+        <div class="heading2">
+        </div>
+        <div class="service-container">
+        </div>
+    </section>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="../static/images/Logo.webp" alt="">
+                <p>&#169; CarRental All Right Reserverd</p>
+            </div>
+            <div class="social-media">
+                <a href="#"><i class='bx bxl-facebook-circle'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                <a href="#"><i class='bx bxl-linkedin-square'></i></a>
+            </div>
+        </div>
+        
+    </footer>
+
+    <!--ScrollReveal Animation-->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script type="text/javascript" src="../static/scripts/main.js?{{ cache_id }}"></script>
+</body>
+
+</html>
