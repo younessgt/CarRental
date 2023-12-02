@@ -9,51 +9,21 @@ $(document).ready(function(){
 
 	var currentBack = 0;
 	// setting the first image background immediatly
-	//$('.home').css('background-image', backgrounds[currentBack]);
-	
-	// insuring that all background images are loaded by the browser
-    function preloadImages() {
-
-		for (var i = 0; i < backgrounds.length; i++) {
-
-			$('<img/>')[0].src = backgrounds[i].slice(5, -2); // Remove 'url(' and ')' from the string
-        }
-    }
+	$('.home').css('background-image', backgrounds[currentBack]);
 
 	// function to change to background image
 	function changeBackground() {
-		
-		$('.home').css('background-image', backgrounds[currentBack]);
+
 		currentBack = (currentBack + 1) % backgrounds.length;
+		$('.home').css('background-image', backgrounds[currentBack]);
 
 	}
-
-	preloadImages();
 	
+	// start the interval and change images every 3s
+	setInterval(changeBackground, 3000);
 
-	setTimeout(function() {
-		
-		changeBackground() // change immediately
-		// start the interval and change images every 3s
-		setInterval(changeBackground, 3000);
 
-    }, 3000);
 
-	// Making every click on each <a> tag which is a button in our case
-	// go to the entire section
-	$('a[href^="#"]').click(function(e) {
-		e.preventDefault();
-		var targetID = $(this).attr('href');
-		var target = $(targetID);
-
-		if (target.length) {
-			var headerHeight = $('header').outerHeight();  // Calculate the height of the header
-			var position = target.offset().top - headerHeight;
-            $('html, body').animate({
-				scrollTop: position // Offset the scroll position
-            }, 380); // Duration of the scrolling animation
-        }
-    });
 
 
 	// animation on scroll
@@ -61,10 +31,7 @@ $(document).ready(function(){
         distance: '70px',
         duration: 2500,
         delay: 400,
-        reset: true,
-		beforeReveal: function(domEl) {
-			$(domEl).css('visibility', 'visible'); // Make elements visible before animation
-            }
+        reset: true
     });
 
     An.reveal('.text', {delay: 200, origin: 'top'});
