@@ -261,7 +261,7 @@ header {
 	word-spacing: normal;
 	margin-left: auto;
 	margin-right: 50%;
-	padding-top:15px
+	padding-top:15px;
 	padding-bottom:15px;
 
 
@@ -731,7 +731,7 @@ header {
 
 }
 
-@media (max-width:412px){
+@media (max-width:431px){
     
 
     .text h1.first  {
@@ -753,6 +753,19 @@ header {
 		margin-top: 60px;
 		margin-bottom: -50%;
 	}
+
+	.btn1 {
+        display: flex;
+        justify-content: center;
+        width: 80%;
+		margin-left: 10%;
+        margin-right: 10%;
+
+    }
+    .input-box {
+        margin-left: 10%;
+        margin-right: 10%;
+    }
 
 }
 /*/================= sign in responsive for meduim devices ==================/*/
