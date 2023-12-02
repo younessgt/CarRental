@@ -504,7 +504,7 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 50px;
+    padding: 20px;
     border: 1px solid #eeeff1;
     background: #eeeff1;
 }
