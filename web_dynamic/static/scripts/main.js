@@ -1,6 +1,16 @@
 /* Show the menu */
 $(document).ready(function(){
-   
+	
+	// user login
+	$('#login-btn').on('click', function() {
+        $('#login').addClass('show-login');
+
+    });
+
+    $('#login-close').on('click', function() {
+        $('#login').removeClass('show-login');
+
+    });
 	// Animate Background
 	var backgrounds = [
 		'url("../static/images/Backround2.webp")',
