@@ -28,9 +28,41 @@
             <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
             <li class="nav__item"><a href="#services" class="nav__link">Service</a></li>
         </ul>
-            
 
+		<div class="nav__action">
+            <i class="bx bx-user nav__login" id="login-btn" ></i>
+        </div>
+            
+		
     </header>
+
+	<div class="login" id="login">
+        <form action="" class="login__form">
+            <h2 class="login__title">Sign In</h2>
+            <div class="login__group">
+                <label for="email" class="login__label">Email</label>
+                <input type="email" class="login__input" placeholder="Enter your Email" id="email">
+            </div>
+            <div class="login__group">
+                <label for="password" class="login__label">Password</label>
+                <input type="password" class="login__input" placeholder="Enter your Password" id="password">
+            </div>
+            <div>
+                <p class="login__signup">
+                    You don't have an account? <a href="#" class="login__link" id="signup-btn">Sign Up</a>
+                </p>
+
+                <a href="#" class="login__forgot">
+                    Forgot Your Password?
+                </a>
+                <button type="submit" class="login__button">Log In</button>
+            </div>
+        </form>
+
+        <i class="ri-close-line login__close" id="login-close"></i>
+
+
+    </div>
 
     <section class="home" id="home">
         <div class="text">
