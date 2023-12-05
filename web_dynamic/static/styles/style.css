@@ -46,7 +46,7 @@ header {
     align-items: center;
     justify-content: space-between;
     background: #eeeff1;
-    padding: 15px 100px;
+    padding: 10px 100px;
 
 
 }
@@ -466,7 +466,7 @@ header {
 .service-container .box .btn {
     display: flex;
     float: right;
-    justify-content: ;
+    /*justify-content: ;*/
     background-color: var(--main-color);
     color: #fff;
     border-radius: 1rem;
@@ -610,8 +610,8 @@ header {
     }
 
 	.text p {
-		margin-right:120px
-        font-size: 14px;
+		margin-right:120px;
+		font-size: 14px;
     }
 
 }

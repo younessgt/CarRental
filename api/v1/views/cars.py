@@ -81,7 +81,7 @@ def car(rent_price):
         price = int(rent_price)
     except ValueError:
         return jsonify({'error': '{} is not a number'.format(rent_price)})
-    price_list = [70, 90, 120]
+    price_list = [75, 120, 350]
 
     if price in price_list:
         car_list = []
