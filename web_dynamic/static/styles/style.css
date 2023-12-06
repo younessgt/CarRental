@@ -220,6 +220,13 @@ header {
     transform: translateY(0);
 }
 
+.Notice {
+    color: red;
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+
+}
 
 .home {
     width: 100%;
@@ -267,6 +274,11 @@ header {
 
 	/*width: 70%;
     margin: 20px 0;*/
+}
+
+.box p {
+    display: inline-block;
+    margin-top: 5px;
 }
 
 .form-container form {
