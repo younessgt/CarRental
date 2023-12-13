@@ -7,8 +7,9 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from models.base_model import BaseModel, Base
 from models.location import Location
 from models.car import Car
+from models.user import User
 
-list_class = {"Location": Location, "Car": Car}
+list_class = {"Location": Location, "Car": Car, "User": User}
 
 
 class Dbstorage:
@@ -78,18 +79,43 @@ class Dbstorage:
 
         if cls not in list_class.values():
             return None
+        """for efficienty we shoud replace all() by
+        obj = self.__session.query(cls).filter_by(id=id).first()
+        return obj"""
         list_obj = self.__session.query(cls).all()
         for obj in list_obj:
             if obj.id == id:
                 return obj
         return None
 
-    def update_status(self, car_id, new_status):
-        """ updating the object status """
+    def get_by_username(self, cls, username):
+        """ method to retrieve a user object based on the username """
+
+        if cls not in list_class.values():
+            return None
+
+        obj = self.__session.query(cls).filter_by(username=username).first()
+        return obj
+
+    def get_by_email(self, cls, email):
+        """ method to retrieve a user object based on the email """
+
+        if cls not in list_class.values():
+            return None
+
+        obj = self.__session.query(cls).filter_by(email=email).first()
+        return obj
+
+    def update_status(self, car_id, new_status, userid):
+        """ updating the object status (this method is for the car object)"""
         from models import storage
         car = storage.get(Car, car_id)
         if car:
             car.status = new_status
+            if new_status == "Booked":
+                car.user_id = userid
+            else:
+                car.user_id = None
             car.update()
             return True
         return False

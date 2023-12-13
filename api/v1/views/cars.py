@@ -94,10 +94,10 @@ def car(rent_price):
         return jsonify({'Sorry': 'No car was Found with this price'})
 
 
-@app_views.route('/update_car_status/<car_id>/<new_status>', methods=['POST'], strict_slashes=False)
-def update_car_status(car_id, new_status):
+@app_views.route('/update_car_status/<car_id>/<new_status>/<user_id>', methods=['POST'], strict_slashes=False)
+def update_car_status(car_id, new_status, user_id):
     """ updating the status of cars and returning True if success"""
 
-    if storage.update_status(str(car_id), str(new_status)):
+    if storage.update_status(str(car_id), str(new_status), str(user_id)):
         return jsonify(success=True)
     return jsonify(success=False), 400
