@@ -1,5 +1,5 @@
 # CarRental
-![](web_page_interface.png)
+![](web_page_interface.PNG)
 
 Welcome to CarRentalApp, a web application designed to streamline the car rental process. This platform offers a user-friendly interface for customers to browse, reserve, and rent vehicles with ease.
 
@@ -11,7 +11,7 @@ Welcome to CarRentalApp, a web application designed to streamline the car rental
          Leila Merzak - [Linkedin](https://www.linkedin.com/in/leila-merzak-797701197/)
 
 ## The Solution Architecture
-![](architecture.png)
+![](architecture.PNG)
 
 ## Tips
 
@@ -49,7 +49,7 @@ MYSQL_USER=[YourUsername] MYSQL_PWD=[YourPassword]MYSQL_HOST=localhost MYSQL_DB=
 ```
     
 ## Usage/Examples
-![](web_page.png)
+![](web_page.PNG)
 1. In a container run a command to start your api
 ```bash
 
