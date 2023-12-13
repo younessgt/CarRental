@@ -58,20 +58,3 @@ glendora.cars.extend([car17, car15, car13])
 malibu.cars.extend([car13, car14, car15, car16, car17])
 
 storage.save()
-
-print("------ all cars in Malibu location -------")
-for car in malibu.cars:
-    print(car.name)
-
-print("------ all locations where Bmw Serie 3 exist")
-for location in car4.location:
-    print(location.name)
-
-print("--------- all method ------")
-list_obj = storage.all(Location)
-
-for obj in list_obj.values():
-    print(obj.name)
-print("------- get method -----")
-obj1 = storage.get(Car, car4.id)
-print(obj1.name)

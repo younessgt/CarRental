@@ -4,7 +4,6 @@
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Table, ForeignKey
 from sqlalchemy.orm import relationship
-"""from models.car import Car"""
 
 """many to many relationship """
 

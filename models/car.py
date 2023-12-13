@@ -13,8 +13,7 @@ class Car(BaseModel, Base):
     fuel = Column(String(128), nullable=False)
     rent_price = Column(Integer, nullable=False, default=0)
     status = Column(String(128), nullable=False)
-    """location_id = Column(String(60), ForeignKey('locations.id'),
-                         nullable=False)"""
+    user_id = Column(String(60), ForeignKey('users.id'))
 
     def __init__(self, *args, **kwargs):
         """initializes state"""
