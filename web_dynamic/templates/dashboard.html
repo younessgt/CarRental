@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CarRental</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>var currentUserId = {{ user_id | tojson }};</script>
+    <link rel="stylesheet" href="../static/styles/dashboard.css?{{ cache_id }}">
+    <!--=============== FAVICON ===============-->
+    <link rel="shortcut icon" href="../static/images/favlogo.webp?{{ cache_id }}">
+    <!--=============== REMIX ICONS ===============-->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-off.css' rel='stylesheet'>
+
+</head>
+<body>
+    <header>
+		<a href="#" class="logo"><img src="../static/images/Logo.webp" alt=""></a>
+			<ul class="nav__list">
+				<li class="nav__item"><a href="/" class="nav__link">Home</a></li>
+			</ul>
+
+        <div class="nav__action">
+			{% if current_user.is_authenticated %}
+            <a  href="/logout"> <i class="gg-log-off nav__login"></i></a>
+            {% else %}
+			<i class="bx bx-user nav__login" id="login-btn" ></i>
+			{% endif %}
+        </div>
+
+
+    </header>
+    <div class="main-content">
+	   <div class="heading">
+		   <h1> Your Orders </h1>
+	   </div>
+	   {% for car in cars %}
+       <section class="item">
+           <div class="item-image">
+			<img src="../static/images/{{ car.name.replace(' ', '-')}}.png" alt="Car Image">
+           </div>
+           <div class="item-details">
+			<h3>{{ car.name}}</h3>
+			<p>Price: {{ car.rent_price }}$</p>
+			<p>Fuel: {{ car.fuel }}</p>
+           </div>
+		   <div class="item-delete">
+				<i class="ri-delete-bin-line delete_btn" data-id="{{ car.id }}" data-status="{{ car.status }}"></i>
+           </div>
+       </section>
+	   {% endfor %}
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="../static/images/Logo.webp" alt="">
+                <p>&#169; CarRental All Right Reserverd</p>
+            </div>
+            <div class="social-media">
+                <a href="#"><i class='bx bxl-facebook-circle'></i></a>
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-instagram-alt'></i></a>
+                <a href="#"><i class='bx bxl-linkedin-square'></i></a>
+            </div>
+        </div>
+
+    </footer>
+
+	<script type="text/javascript" src="../static/scripts/dashboard.js?{{ cache_id }}"></script>
+</body>
+</html>

@@ -6,14 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CarRental</title>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <link rel="stylesheet" href="../static/styles/style.css?{{ cache_id }}">
+    <script>var isUserAuthenticated = {{ is_authenticated | tojson }};</script>
+    {% if is_authenticated %}
+	<script>var currentUserId = {{ user_id | tojson }};</script>
+	{% endif %}
+	<link rel="stylesheet" href="../static/styles/style.css?{{ cache_id }}">
     <!--=============== FAVICON ===============-->
     <link rel="shortcut icon" href="../static/images/favlogo.webp?{{ cache_id }}">
     <!--=============== REMIX ICONS ===============-->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/log-off.css' rel='stylesheet'>
 
 </head>
 
@@ -27,44 +31,22 @@
         <ul class="nav__list">
             <li class="nav__item"><a href="#home" class="nav__link">Home</a></li>
             <li class="nav__item"><a href="#services" class="nav__link">Service</a></li>
+	    {% if current_user.is_authenticated %}
+	    <li class="nav__item"><a href="/dashboard" class="nav__link">Dashboard</a></li>
+	    {% endif %}
         </ul>
 
         <div class="nav__action">
+		   {% if current_user.is_authenticated %}
+		   <a  href="/logout"> <i class="gg-log-off nav__login"></i></a>
+		   {% else %}
            <i class="bx bx-user nav__login" id="login-btn" ></i>
+           {% endif %}
         </div>
             
 		
     </header>
-
-    <div class="login" id="login">
-        <form action="" class="login__form">
-            <h2 class="login__title">Sign In</h2>
-            <div class="login__group">
-                <label for="email" class="login__label">Email</label>
-                <input type="email" class="login__input" placeholder="Enter your Email" id="email">
-            </div>
-            <div class="login__group">
-                <label for="password" class="login__label">Password</label>
-                <input type="password" class="login__input" placeholder="Enter your Password" id="password">
-            </div>
-            <div>
-                <p class="login__signup">
-                    You don't have an account? <a href="#" class="login__link" id="signup-btn">Sign Up</a>
-                </p>
-
-                <a href="#" class="login__forgot">
-                    Forgot Your Password?
-                </a>
-                <button type="submit" class="login__button">Log In</button>
-		<p class="Notice">Please Notice the back end of this part is not Done yet </p>
-            </div>
-        </form>
-
-        <i class="ri-close-line login__close" id="login-close"></i>
-
-
-    </div>
-
+	{% include 'signup.html' %}
     <section class="home" id="home">
         <div class="text">
             <h1 class="first">Your Budget<br></h1>
@@ -80,7 +62,6 @@
 						{% for location in locations %}
 						<option value="" data-id="{{ location.id }}" data-name="{{ location.name }}">{{ location.name }}</option>
 						{% endfor %}
-                        <!-- Add other options here -->
                     </select>            
                                
                 </div>
@@ -92,7 +73,6 @@
                         <option value="" data-id="75" data-name="price1">75</option>
                         <option value="" data-id="120" data-name="price2">120</option>
                         <option value="" data-id="350" data-name="price3">350</option>
-                        <!-- Add other options here -->
                     </select> 
                 </div>
                 <a href="#services" class="btn1">submit</a> 
