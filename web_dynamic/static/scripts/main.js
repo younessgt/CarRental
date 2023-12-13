@@ -8,6 +8,35 @@ $(document).ready(function () {
   $('#login-close').on('click', function () {
     $('#login').removeClass('show-login');
   });
+
+  // Check URL for 'form' parameter
+  const urlParams = new URLSearchParams(window.location.search);
+  const formToShow = urlParams.get('form');
+
+  if (formToShow === 'signup' || formToShow === 'signin') {
+    $('#login').addClass('show-login');
+  }
+
+  // Show the appropriate form based on the parameter
+  if (formToShow === 'signup') {
+    $('#login-signin').hide();
+    $('#login-signup').show();
+  } else if (formToShow === 'signin') {
+    $('#login-signup').hide();
+    $('#login-signin').show();
+  }
+
+  $('#signup-btn').click(function(e) {
+    e.preventDefault();
+    $('#login-signin').hide();
+    $('#login-signup').show();
+  });
+
+  $('#signin-btn').click(function(e) {
+    e.preventDefault();
+    $('#login-signup').hide();
+    $('#login-signin').show();
+  });
   // Animate Background
   const backgrounds = [
     'url("../static/images/Backround2.webp")',
@@ -15,8 +44,6 @@ $(document).ready(function () {
   ];
 
   let currentBack = 0;
-  // setting the first image background immediatly
-  // $('.home').css('background-image', backgrounds[currentBack]);
 
   // insuring that all background images are loaded by the browser
   function preloadImages () {
@@ -76,24 +103,24 @@ $(document).ready(function () {
     const $button = $(this);
     const carId = $button.data('id');
     const carStatus = $button.data('status');
-    const newStatus = carStatus === 'unbooked' ? 'Booked' : 'unbooked';
-    $.ajax({
-      url: `http://127.0.0.1:5001/api/v1/update_car_status/${carId}/${newStatus}`,
-      method: 'POST',
-      success: function (data) {
-        if (data.success) {
-          toggleBooking($button);
-        } else {
-          console.error('Error updating status');
+    const newStatus = 'Booked';
+	const userId = currentUserId;
+	if (carStatus === 'unbooked') {
+      $.ajax({
+        url: `http://127.0.0.1:5001/api/v1/update_car_status/${carId}/${newStatus}/${userId}`,
+        method: 'POST',
+        success: function (data) {
+          if (data.success) {
+            toggleBooking($button);
+          } else {
+            console.error('Error updating status');
+          }
+        },
+        error: function (error) {
+          console.error('Error:', error);
         }
-      },
-      error: function (error) {
-        console.error('Error:', error);
-      }
-    });
-    // if (carStatus === 'unbooked') {
-    // toggleBooking(this); // 'this' refers to the clicked element
-    // }
+      });
+	}
   });
 
   $(document).on('click', '.btn1', function () {
@@ -102,26 +129,10 @@ $(document).ready(function () {
     }
   });
 
-  /* function toggleBooking(element) {
-
-        var $element = $(element);
-        $('.service-container.box.btn').append('<img src="assets/images/checkmark-icon.png" class="icon" alt="">');
-
-        if ($element.text() === "Book Now") {
-            $element.text("Booked").addClass("secondary");
-        } else {
-            $element.text("Book Now").removeClass("secondary");
-
-        }
-    } */
-
-  function toggleBooking ($button) {
-    // var $element = $(element); // 'this' refers to the clicked element
+    function toggleBooking ($button) {
 
     // Check if the button has already been clicked and the booking is made
     if ($button.hasClass('booked')) {
-      $button.text('Book Now');
-      $button.removeClass('booked secondary');
       $button.find('.icon').remove(); // Remove the checkmark icon when unbooking
     } else {
       $button.text('Booked');
@@ -168,24 +179,16 @@ $(document).ready(function () {
   });
 
   $('#price').change(function () {
-    // Reset the contents of listCheckedPrice
     listCheckedPrice = [];
 
-    // Use jQuery to get the selected option element
     const selectedOption = $(this).find('option:selected');
 
-    // Retrieve the data-id and data-name attributes from the selected option
     const priceId = selectedOption.data('id');
-    // var priceName = selectedOption.data('name');
-    // Store the retrieved values in the listCheckedPrice object
     listCheckedPrice.push(priceId);
   });
 
   $('.btn1').click(function () {
     $('.service-container').empty();
-    // const dataLo = Object.keys(listCheckedLocation);
-    // let dataPr = Object.keys(listCheckedPrice);
-    // dataPr = dataPr.map(item => parseInt(item, 10));
     $.ajax({
       type: 'POST',
       data: JSON.stringify({ location: listCheckedLocation, price: listCheckedPrice }),
@@ -194,16 +197,10 @@ $(document).ready(function () {
       dataType: 'json',
       success: function (data) {
         for (const car of data) {
-          // images = {"Ford Cabriolet": "../static/images/Ford-Cabriolet.png",
-          // "Renault": "../static/images/Renault.png",
-          // "Mercedes Benz 219": "../static/images/Mercedes-Benz-219.png",
-          // "Bmw 507": "../static/images/Bmw-507.png",
-          // "Auto Union 1000s": "../static/images/Auto-Union-1000s.png",
-          // "Mercedes Benz 220a":"../static/images/Mercedes-Benz-219.png",
-          // "Citroen Traction": "../static/images/Mercedes-Benz-219.png",
-          // "Chevrolet Corvette": "../static/images/Bmw-507.png",
-          // "Porsche 911": "../static/images/Ford-Cabriolet.png"}
           const imageName = car.name.replace(/\s+/g, '-');
+		  var buttonHtml = isUserAuthenticated
+                ? `<a href="javascript:void(0);" class="btn" data-id="${car.id}" data-status="${car.status}">Book now</a>`
+                : `<a href="/signin" class="btn3" data-id="${car.id}" data-status="${car.status}">Book now</a>`;
           $('.service-container').append(`
         <div class="box">
           <div class="box-img">
@@ -212,8 +209,8 @@ $(document).ready(function () {
           <h2 class="car">${car.name}</h2>
           <h3 class="fuel">Fuel --->  ${car.fuel}</h3>
           <h3 class="price">Price ---> <span> ${car.rent_price}$ </span>/Day</h3>
-          <a href="javascript:void(0);" class="btn" data-id="${car.id}" data-status="${car.status}">Book now</a>
-          </div>`);
+		  ${buttonHtml}
+		  </div>`);
           // after refreshing the page and clicking submit again
           // we check each btn to see it status which is gotten from the database
           // if the status is Booked the button color should be green

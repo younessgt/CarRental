@@ -227,7 +227,9 @@ header {
     font-size: 10px;
 
 }
-
+.alert {
+	color: red;
+}
 .home {
     width: 100%;
     min-height: 100vh;
@@ -475,7 +477,7 @@ header {
 .service-container .box h3 span {
     color: var(--second-color);
 }
-.service-container .box .btn {
+.service-container .box .btn, .service-container .box .btn3 {
     display: flex;
     float: right;
     /*justify-content: ;*/
@@ -490,11 +492,11 @@ header {
     margin-left: 70%;*/
 }
 
-.service-container .box .btn.secondary {
+.service-container .box .btn.secondary, .service-container .box .btn3.secondary {
     background-color: var(--second-color);
 }
 
-.service-container .box .btn:hover {
+.service-container .box .btn:hover, .service-container .box .btn3:hover {
     background-color: var(--second-color);
 }
 
