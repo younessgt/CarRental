@@ -230,6 +230,10 @@ header {
 .alert {
 	color: red;
 }
+
+.alert2 {
+	color: green;
+}
 .home {
     width: 100%;
     min-height: 100vh;
