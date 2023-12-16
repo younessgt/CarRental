@@ -138,7 +138,7 @@ def login():
 
     if user and check_password_hash(user.password, password):
         login_user(user)
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('home'))
 
     else:
         flash('Invalid username or password', 'error')
